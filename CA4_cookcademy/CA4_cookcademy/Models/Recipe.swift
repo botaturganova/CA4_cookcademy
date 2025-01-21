@@ -25,6 +25,9 @@ struct Recipe: Identifiable {
                   ingredients: [],
                   directions: [])
     }
+    var isValid: Bool {
+        mainInformation.isValid && !ingredients.isEmpty && !directions.isEmpty
+      }
 }
     
     struct MainInformation {
@@ -38,6 +41,9 @@ struct Recipe: Identifiable {
             case dinner = "Dinner"
             case dessert = "Dessert"
         }
+        var isValid: Bool {
+           !name.isEmpty && !description.isEmpty && !author.isEmpty
+         }
     }
     
     struct Ingredient {
@@ -70,7 +76,17 @@ struct Recipe: Identifiable {
             var singularName: String { String(rawValue.dropLast()) }
             
         }
-    }
+        
+        init(name: String, quantity:Double, unit: Unit) {
+            self.name = name
+            self.quantity = quantity
+            self.unit = unit
+          }
+          
+          init() {
+            self.init(name: "", quantity: 1.0, unit: .none)
+          }
+        }
     
     struct Direction {
         var description: String
