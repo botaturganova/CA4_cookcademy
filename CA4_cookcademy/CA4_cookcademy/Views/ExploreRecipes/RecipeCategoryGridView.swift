@@ -15,11 +15,11 @@ struct RecipeCategoryGridView: View {
             ScrollView {
                 LazyVGrid(columns: columns, content: {
                     ForEach(MainInformation.Category.allCases, id: \.self) { category in
-                        NavigationLink(
-                            destination: RecipesListView(category: category).environmentObject(recipeData),
-                            label: {
-                                CategoryView(category: category)
-                            })
+                        NavigationLink(destination: RecipesListView(viewStyle: .singleCategory(category)),
+                                           label: {
+                                            CategoryView(category: category)
+                                           }
+                            )
                     }
                 })
             }

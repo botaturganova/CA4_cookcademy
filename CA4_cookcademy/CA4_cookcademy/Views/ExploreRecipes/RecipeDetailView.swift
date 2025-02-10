@@ -52,13 +52,18 @@ struct RecipeDetailView: View {
     }
     .navigationTitle(recipe.mainInformation.name)
     .toolbar {
-           ToolbarItem {
-             HStack {
-               Button("Edit") {
-                 isPresenting = true
-               }
-             }
-           }
+        ToolbarItem {
+            HStack {
+                Button("Edit") {
+                    isPresenting = true
+                }
+                Button(action: {
+                    recipe.isFavorite.toggle()
+                }) {
+                    Image(systemName: recipe.isFavorite ? "heart.fill" : "heart")
+                }
+            }
+        }
          }
          // 3
          .sheet(isPresented: $isPresenting) {

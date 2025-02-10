@@ -12,7 +12,7 @@ import SwiftUI
 struct CA4_cookcademyApp: App {
   var body: some Scene {
     WindowGroup {
-      RecipeCategoryGridView()
+        MainTabView()
     }
   }
 }
