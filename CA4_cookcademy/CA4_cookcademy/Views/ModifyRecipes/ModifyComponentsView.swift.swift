@@ -30,7 +30,7 @@ protocol ModifyComponentView: View {
 struct ModifyComponentsView<Component: RecipeComponent, DestinationView: ModifyComponentView>: View where DestinationView.Component == Component {
     @Binding var components: [Component]
     
-    private let listBackgroundColor = AppColor.background
+    @AppStorage("listBackgroundColor") private var listBackgroundColor = AppColor.background
     private let listTextColor = AppColor.foreground
 
     @State private var newComponent = Component()
