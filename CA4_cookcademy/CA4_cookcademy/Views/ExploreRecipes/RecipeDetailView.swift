@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecipeDetailView: View {
     @Binding var recipe: Recipe
-    
+    @EnvironmentObject var recipeData: RecipeData
     @State private var isPresenting = false
     @AppStorage("hideOptionalSteps") private var hideOptionalSteps: Bool = false
     
@@ -82,16 +82,20 @@ struct RecipeDetailView: View {
                         }
                         .navigationTitle("Edit Recipe")
                 }
+                .onDisappear {
+                    recipeData.saveRecipes()
+                }
+            }
+            }
+        }
+        
+        struct RecipeDetailView_Previews: PreviewProvider {
+            @State static var recipe = Recipe.testRecipes[0]
+            static var previews: some View {
+                NavigationView {
+                    RecipeDetailView(recipe: $recipe)
+                }
             }
         }
     }
-    
-    struct RecipeDetailView_Previews: PreviewProvider {
-        @State static var recipe = Recipe.testRecipes[0]
-        static var previews: some View {
-            NavigationView {
-                RecipeDetailView(recipe: $recipe)
-            }
-        }
-    }
-}
+
